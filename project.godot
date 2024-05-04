@@ -11,9 +11,13 @@ config_version=5
 [application]
 
 config/name="SpeedrunPlatformer"
-run/main_scene="res://scenes/levels/level.tscn"
+run/main_scene="res://scenes/levels/start_menu.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://assets/textures/other/End (Idle).png"
+
+[autoload]
+
+AudioPlayer="*res://scenes/audio_player.tscn"
 
 [display]
 
@@ -60,6 +64,7 @@ reset={
 2d_physics/layer_2="player"
 2d_physics/layer_3="deathzone"
 2d_physics/layer_4="trap"
+2d_physics/layer_5="exit_area"
 
 [rendering]
 

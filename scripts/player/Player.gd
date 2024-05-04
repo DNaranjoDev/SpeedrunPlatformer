@@ -8,16 +8,19 @@ class_name Player
 @export var jump_velocity = -250.0
 @export var gravity = 400.0
 
+var active = true
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y += gravity * delta
-	# Handle jump.
-	if Input.is_action_just_pressed("jump") and is_on_floor():
-		jump(jump_velocity)
-	# Handle movement
-	var direction := Input.get_axis("move_left", "move_right")
+	var direction = 0
+	if active == true:
+		# Handle jump.
+		if Input.is_action_just_pressed("jump") and is_on_floor():
+			jump(jump_velocity)
+		# Handle movement
+		direction = Input.get_axis("move_left", "move_right")
 	if direction != 0:
 		animated_sprite.flip_h = (direction == -1)
 	if direction:
@@ -45,4 +48,5 @@ func update_animations(direction):
 			animated_sprite.play("fall")
 
 func jump(jump_velocity):
+	AudioPlayer.play_sfx("jump")
 	velocity.y = jump_velocity
